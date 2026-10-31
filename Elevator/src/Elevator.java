@@ -3,9 +3,12 @@ import java.util.*;
 public class Elevator {
 	
 	 Scanner scanner = new Scanner(System.in);
+	// กำหนดให้ชั้นบนสุดคือชั้น 12
 	 final int top_floor = 12;
+	// กำหนดให้ชั้นล่างสุดคือชั้น 1
 	 final int ground_floor = 1;
 	 int current_floor = 1;
+	// สร้าง ArrayList เก็บค่าชั้นที่ต้องไป
 	 List<Integer> required_floor = new ArrayList<Integer>();
 
     public static void main(String[] args) {
@@ -27,6 +30,7 @@ public class Elevator {
         
     } // จบ method pause()
 
+	// ลิฟต์ขึ้น
     public void goUp(int closest_floor) {
     	
         int starting_floor = current_floor;
@@ -38,13 +42,14 @@ public class Elevator {
         while (current_floor < closest_floor) {
             current_floor++;
             System.out.print(current_floor + " ");
-            pause(1000); // 1 วิ
+            pause(1000); // 1 วิ ต่อการ loop 1 ครั้ง
         }
         
         System.out.println();
         
     } // จบ method goUp()
 
+	// ลิฟต์ลง
     public void goDown(int closest_floor) {
     	
         int starting_floor = current_floor;
@@ -56,7 +61,7 @@ public class Elevator {
         while (current_floor > closest_floor) {
             current_floor--;
             System.out.print(current_floor + " ");
-            pause(1000); // 1 วิ
+            pause(1000); // 1 วิ ต่อการ loop 1 ครั้ง
             
         }
         
@@ -64,7 +69,7 @@ public class Elevator {
         
     } // จบ method goDown()
 
-    // หาชั้นที่ใกล้ current_floor ที่สุด
+    // หาชั้นที่ใกล้ current_floor (ชั้นปัจจุบัน) ที่สุด
     public int closest_floor() {
     	
         int closest_floor = 0;
@@ -85,7 +90,7 @@ public class Elevator {
         
     } // // จบ method closest_floor()
 
-    // เก็บข้อมูล
+    // รับข้อมูล เช็กความถูกต้องของข้อมูล และประตูลิฟต์
     public void run() {
     	
         int counter = 0;
@@ -102,7 +107,7 @@ public class Elevator {
                 System.out.println("The selected floor is: " + next_floor);
                 System.out.println();
                 
-                // ใส่ 0 จบ session.
+                // ใส่ 0 จบ session
                 if (next_floor == 0) {
                 	
                     break;
@@ -115,7 +120,7 @@ public class Elevator {
                     
                 } 
                 
-                // ใส่เลขซ้ำลบออกตัวนึง
+                // ใส่เลขซ้ำ ลบเลขซ้ำออกตัวนึง
                 else if (required_floor.contains(next_floor)) {
                 	
                 	required_floor.remove(Integer.valueOf(next_floor));
@@ -134,8 +139,8 @@ public class Elevator {
                     
                 }
                 
-                // 11 ชั้นถูกเลือก เริ่ม run
-                if(counter == 11){
+                // ถ้าทั้ง 11 ชั้นถูกเลือก เริ่ม run
+                if (counter == 11) {
                 	
                     break;
                     
@@ -145,7 +150,7 @@ public class Elevator {
             
         } // จบ try
        
-        // ข้อมูลไม่ใช่ integer 
+        // ข้อมูลไม่ใช่ integer
         catch (Exception e) {
         	
             System.out.println("Please enter something from range of integers [1-12], or [0] to end current sequence of floors.");
@@ -153,9 +158,10 @@ public class Elevator {
             
         } // จบ catch
 
-        // ประตูลิฟต์
+        // Loop การทำงานของการเปิดและปิดประตูลิฟต์ตามจำนวนชั้นที่ถูกกด
         for (int i = 0; i < counter; i++) {
-        	
+
+			// ArrayList ว่าง
             if (required_floor.isEmpty()){
             	
                 System.out.println("Doors are closing....");
@@ -169,18 +175,21 @@ public class Elevator {
             System.out.println("Doors are closing....");
             pause(1000); // 1 วิ
 
+			// ให้ [ชั้นที่กำลังไป] เท่ากับ [ชั้นที่ใกล้กับ current_floor ที่สุด]
             upcoming_floor = closest_floor();
             
-            // ถ้าชั้นถัดไปน้อยกว่าชั้นปัจจุบันให้ goDown
+            // ถ้า upcoming_floor (ชั้นที่กำลังไป) น้อยกว่าชั้นปัจจุบันให้เรียกใช้ method goDown()
             if (upcoming_floor < current_floor) {
-            	
+
+				// ให้ลิฟต์ลง
                 goDown(upcoming_floor);
                 
             } 
             
-            // ถ้าชั้นถัดไปมากกว่าชั้นปัจจุบันให้ goDown
+            // ถ้า upcoming_floor (ชั้นที่กำลังไป) มากกว่าชั้นปัจจุบันให้เรียกใช้ method goUp()
             else if (upcoming_floor > current_floor) {
-            	
+
+				// ให้ลิฟต์ขึ้น
                 goUp(upcoming_floor);
                 
             }
