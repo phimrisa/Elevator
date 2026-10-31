@@ -11,6 +11,7 @@ public class Elevator {
 	// สร้าง ArrayList เก็บค่าชั้นที่ต้องไป
 	 List<Integer> required_floor = new ArrayList<Integer>();
 
+	// สร้าง Object และ run การทำงาน
     public static void main(String[] args) {
     	
         Elevator elevator = new Elevator();
@@ -19,6 +20,7 @@ public class Elevator {
         
     } // จบ method main()
 
+	// เวลาการแสดงผลของ loop แต่ละครั้ง
     public void pause(int ms) { // ms คือ หน่วย milliseconds
     	
         try {
