@@ -99,8 +99,8 @@ public class Elevator {
         int upcoming_floor;
 
         System.out.println("The Current Floor is: " + current_floor);
-        System.out.print("Please enter destination floor [1-12]: ");
-        
+        System.out.print("Please enter destination floor [1-12]: ");        
+        	
         try {
             while (true) {
             	
@@ -118,16 +118,20 @@ public class Elevator {
                 // ใส่เลขที่ไม่ใช่ 1-12 หรือเลขเดียวกันกับ current_floor
                 if (next_floor < ground_floor || next_floor > top_floor || next_floor == current_floor) {
                 	
-                    System.out.print("You have selected floor that doesnt exist or you are already on it, please select different floor.");
-                    
+                    System.out.println("You have selected a floor that doesn't exist or you are already on it, please select a different floor.");
+                    System.out.println();
+                    break;
                 } 
                 
                 // ใส่เลขซ้ำ ลบเลขซ้ำออกตัวนึง
                 else if (required_floor.contains(next_floor)) {
                 	
                 	required_floor.remove(Integer.valueOf(next_floor));
+
                 	System.out.print("Please enter destination floor [1-12], or [0] to end current sequence of floors: ");
                     required_floor.add(next_floor);
+                    
+                    if (!required_floor.contains(next_floor))
                     counter++;
                 	
                 }
@@ -137,6 +141,7 @@ public class Elevator {
                 	
                     System.out.print("Please enter destination floor [1-12], or [0] to end current sequence of floors: ");
                     required_floor.add(next_floor);
+                    
                     counter++;
                     
                 }
@@ -154,12 +159,13 @@ public class Elevator {
        
         // ข้อมูลไม่ใช่ integer
         catch (Exception e) {
-        	
-            System.out.println("Please enter something from range of integers [1-12], or [0] to end current sequence of floors.");
-            System.exit(0);
-            
-        } // จบ catch
 
+        	System.out.println();
+            System.out.println("Please enter something from range of integers [1-12], or [0].");
+            System.exit(0);
+
+        } // จบ catch
+        	
         // Loop การทำงานของการเปิดและปิดประตูลิฟต์ตามจำนวนชั้นที่ถูกกด
         for (int i = 0; i < counter; i++) {
 
