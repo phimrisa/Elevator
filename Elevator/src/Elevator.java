@@ -32,6 +32,27 @@ public class Elevator {
         
     } // จบ method pause()
 
+	// หาชั้นที่ใกล้ current_floor (ชั้นปัจจุบัน) ที่สุด
+    public int closest_floor() {
+    	
+        int closest_floor = 0;
+        int compare = Integer.MAX_VALUE;
+        
+        for (int i = 0; i < required_floor.size(); i++) {
+        	
+            if (Math.abs(current_floor - required_floor.get(i)) < compare) {
+            	
+                compare = Math.abs(current_floor - required_floor.get(i));
+                closest_floor = required_floor.get(i);
+                
+            }
+            
+        }
+        
+        return closest_floor;
+        
+    } // // จบ method closest_floor()
+
 	// ลิฟต์ขึ้น
     public void goUp(int closest_floor) {
     	
@@ -71,27 +92,6 @@ public class Elevator {
         
     } // จบ method goDown()
 
-    // หาชั้นที่ใกล้ current_floor (ชั้นปัจจุบัน) ที่สุด
-    public int closest_floor() {
-    	
-        int closest_floor = 0;
-        int compare = Integer.MAX_VALUE;
-        
-        for (int i = 0; i < required_floor.size(); i++) {
-        	
-            if (Math.abs(current_floor - required_floor.get(i)) < compare) {
-            	
-                compare = Math.abs(current_floor - required_floor.get(i));
-                closest_floor = required_floor.get(i);
-                
-            }
-            
-        }
-        
-        return closest_floor;
-        
-    } // // จบ method closest_floor()
-
     // รับข้อมูล เช็กความถูกต้องของข้อมูล และการเปิด/ปิดประตูลิฟต์
     public void run() {
     	
@@ -120,7 +120,7 @@ public class Elevator {
                 	
                     System.out.println("You have selected a floor that doesn't exist or you are already on it, please select a different floor.");
                     System.out.println();
-                    break;
+                    // break;
                 } 
                 
                 // ใส่เลขซ้ำ ลบเลขซ้ำออกตัวนึง
